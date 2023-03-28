@@ -1,19 +1,19 @@
 package utils;
-import com.github.javafaker.Faker;
-import lombok.experimental.UtilityClass;
-import entities.DeliveryData;
 
-import java.util.Locale;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-@UtilityClass
+import java.util.Random;
+
 public class DataGenerator {
 
-    @UtilityClass
-    public static class Delivery {
-        public static DeliveryData generateData(String locale) {
-            Faker faker = new Faker(new Locale(locale));
-            return new DeliveryData(faker.name().fullName(),
-                    faker.phoneNumber().phoneNumber());
-        }
+    public static String generateDate(int days) {
+        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
+
+    public static String generateCity() {
+        var cities = new String[]{"Кемерово", "Новосибирск", "Санкт-Петербург", "Рязань", "Самара", "Москва"};
+
+        return cities[new Random().nextInt(cities.length)];
     }
 }
